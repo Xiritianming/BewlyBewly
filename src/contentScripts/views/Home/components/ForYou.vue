@@ -100,6 +100,7 @@ async function getRecommendVideos() {
 }
 
 async function getAppRecommendVideos() {
+  let time = String(Math.floor(new Date().getTime() / 1000));
   isLoading.value = true
   try {
     const response = await browser.runtime.sendMessage({
@@ -108,7 +109,7 @@ async function getAppRecommendVideos() {
       sLocale: settings.value.language !== LanguageType.Mandarin_CN ? 'zh-Hant_TW' : 'zh-Hans_CN',
       cLocale: settings.value.language !== LanguageType.Mandarin_CN ? 'zh-Hant_TW' : 'zh-Hans_CN',
       appkey: TVAppKey.appkey,
-      idx: appVideoList.length > 0 ? appVideoList[appVideoList.length - 1].idx : 1,
+      idx: time,
     })
 
     if (response.code === 0) {
@@ -181,11 +182,9 @@ function jumpToLoginPage() {
           :duration-str="video.cover_right_text"
           :title="video.title"
           :cover="video.cover"
-          :author="'avatar' in video.mask ? video.mask.avatar.text : ''"
-          :author-face="'avatar' in video.mask ? video.mask.avatar.cover : ''"
-          :mid="video.mask.avatar.up_id"
-          :capsule-text="video.desc.split('·')[1]"
-          :bvid="video.bvid"
+          :author="video.args.up_name"
+          :mid="video.args.up_id"
+          :bvid="`av${video.param}`"
           :view-str="video.cover_left_text_1"
           :danmaku-str="video.cover_left_text_2"
         />

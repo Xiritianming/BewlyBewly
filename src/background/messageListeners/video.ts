@@ -63,7 +63,8 @@ function handleMessage(message: any) {
   }
   else if (message.contentScriptQuery === 'getAppRecommendVideos') {
     // const url = `https://app.bilibili.com/x/feed/index?build=1&idx=${message.idx}&appkey=27eb53fc9058f8c3&access_key=${message.accessKey}`
-    const url = `https://app.bilibili.com/x/v2/feed/index?build=74800100&device=pad&mobi_app=iphone&c_locate=${message.cLocate}&s_locale=${message.sLocale}&idx=${message.idx}&appkey=${message.appkey}&access_key=${message.accessKey}`
+    // const url = `https://app.bilibili.com/x/v2/feed/index?build=74800100&device=pad&mobi_app=iphone&c_locate=${message.cLocate}&s_locale=${message.sLocale}&idx=${message.idx}&appkey=${message.appkey}&access_key=${message.accessKey}`
+    const url = `https://app.bilibili.com/x/v2/feed/index?build=74800100&device_type=0&mobi_app=iphone&c_locate=${message.cLocate}&s_locale=${message.sLocale}&idx=${message.idx}&appkey=1d8b6e7d45233436&access_key=${message.accessKey}`
     return fetch(url)
       .then(response => response.json())
       .then(data => data)
